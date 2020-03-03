@@ -9,6 +9,9 @@ class Category(models.Model):
     slug = models.SlugField(unique=True, default='')
     comment = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
@@ -19,6 +22,10 @@ class Post(models.Model):
     updated = models.DateTimeField(default=timezone.now)
     publication_date = models.DateTimeField(default=timezone.now)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, verbose_name='Категория', null=True, blank=True)
+        Category, on_delete=models.SET_NULL, verbose_name='Категория',
+        null=True, blank=True, related_name="posts")
     author = models.ForeignKey(
         User, null=True, default=None, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
