@@ -1,0 +1,9 @@
+py .\manage.py shell
+
+
+import requests
+
+post = {'title':' пост из консоли', 'status': 'P', 'content': 'содержимое поста'}
+
+requests.post('http://127.0.0.1:8090', data=post)
+
