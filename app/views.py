@@ -1,6 +1,7 @@
-from app.models import Post
-from app.serializers import PostSerializer
 from rest_framework import generics
+
+from app.models import Post, Category
+from app.serializers import PostSerializer, CategorySerializer
 
 
 class PostList(generics.ListCreateAPIView):
@@ -11,3 +12,13 @@ class PostList(generics.ListCreateAPIView):
 class PostDetail(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class CategoryList(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class CategoryDetail(generics.RetrieveAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField
+    slug = models.SlugField(unique=True, default='')
     comment = models.CharField(max_length=255)
 
 

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from app.models import Post
+
+from app.models import Post, Category
 
 
 @admin.register(Post)
@@ -9,9 +10,22 @@ class PostAdmin(admin.ModelAdmin):
     def post_title(obj):
         return obj.post.title
 
-    list_display = ('title', 'slug', 'status', 'updated',
+    list_display = ('category', 'title', 'slug', 'status', 'updated',
                     'publication_date', 'author', )
-    fields = ('title', 'slug', 'author', 'status', 'content',
+    fields = ('category', 'title', 'slug', 'author', 'status', 'content',
               'updated', 'publication_date')
 
     prepopulated_fields = {"slug": ("title",)}
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+
+    @staticmethod
+    def category_title(obj):
+        return obj.post.name
+
+    list_display = ('name', 'slug', 'comment', )
+    fields = ('name', 'slug', 'comment', )
+
+    prepopulated_fields = {"slug": ("name",)}
